@@ -1,0 +1,41 @@
+# HTTP Configuration
+server:
+  port: 8888
+# Management
+  context-path: /admin
+
+# Logging
+logging:
+  level:
+    com.netflix.discovery: 'OFF'
+    org.springframework.coud: 'DEBUG'
+
+# EUREKA Configuration
+eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 10
+    statusPageurlPath: /admin/info
+    healthCheckUrlPath: /admin/health
+    metadataMap:
+      password: ${security.user.password}
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+
+# SSH Based Git-Repository
+spring:
+  cloud:
+    config:
+      enabled: false
+      server:
+        git:
+          # Need to replace with ssh for security - don't want to list my
+          # password.
+          uri: https://github.com/kirstywilliams/ms-config
+          #username: [needed for private repo]
+          #password: '{cipher}25cf4c129b0ffacc0a94294104acddfbeb7030d2f87d2f2203e329395d9c6669'
+
+# Server Security
+security:
+  user:
+    password: '{cipher}fc2d18c3e4ab42301e43e36bdee8bb80b7516bc9a1ef68e35ead416b69939bd0'
